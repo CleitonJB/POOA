@@ -1,3 +1,4 @@
+<!-- Designed by Cleiton J.B -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,6 +37,8 @@
                     </div>
                 </fieldset>
 
+                <p class="descricao"><b>IMPORTANTE: </b> A listagem abaixo é apenas a ordem na qual me envolvi com algumas das muitas linguagens de programação:</p>
+
                 <div id="list-container">
                     <!-- No data -->
                     <div v-if="linguagens.length == 0">
@@ -64,7 +67,7 @@
                 width: 100vw;
                 height: 100vh;
 
-                background-color: darkgray;
+                background-color: rgb(149, 149, 149);
             }
 
             #app {
@@ -146,6 +149,12 @@
                 border: none;
                 border-radius: 0.35rem;
                 padding: 0.5rem 1rem;
+            }
+
+            .descricao {
+                text-align: center;
+
+                margin-top: 1rem;
             }
 
             #list-container {
