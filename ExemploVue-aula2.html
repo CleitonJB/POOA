@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Meu Top 5</title>
+        <meta charset="utf-8">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id='app'>
+            <div class="content">
+                <h1>Top 5 - Linguagens de programação </h1>
+
+                <fieldset>
+                    <legend>Nova linguagem</legend>
+
+                    <label>Nome:</label>
+                    <input type='text' v-model='aluno.nome'>
+                    <label>Nota:</label>
+                    <input type='number' v-model='aluno.nota'>
+
+                    <button v-on:click="adicionar()">Adicionar</button>
+                </fieldset>
+
+                <div id="list-container">
+                    <!-- No data -->
+                    <div v-if="alunos.length == 0">
+                        <span class="no-data">Não há dados para serem listados!</span>
+                    </div>
+                    <!-- Data list -->
+                    <div v-if="alunos.length > 0">
+                        <div v-for="(aluno, index) in alunos">
+                            <aluno @on-delete="remover" :index="index" :id="aluno.id" :nome="aluno.nome" :nota="aluno.nota"></aluno>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            /* App */
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                width: 100vw;
+                height: 100vh;
+
+                background-color: darkgray;
+            }
+
+            #app {
+                width: 100%;
+                height: 100%;
+
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .content {
+                width: min(50%, 80vw);
+                height: 90%;
+
+                border-radius: 0.35rem;
+
+                color: whitesmoke;
+                background-color: rgb(8, 18, 77);
+                box-shadow: 3px 4px 12px rgb(0, 0, 0);
+            }
+
+            h1 {
+                text-align: center;
+                margin: 0.75rem 0;
+            }
+
+            fieldset {
+                width: 60%;
+
+                border-radius: 0.3rem;
+
+                margin: 0 auto;
+                padding: 1rem;
+            }
+
+            fieldset > legend {
+                padding: 0 0.5rem;
+                font-weight: 600;
+            }
+
+            #list-container {
+                margin-top: 2rem;
+                padding: 0 4rem;
+
+                width: 100%;
+            }
+
+            #list-container > div {
+                text-align: center;
+            }
+
+            #list-container > div > span.no-data {
+                font-weight: 600;
+                font-size: 1.2rem;
+            }
+
+            /* Aluno */
+            .aluno-container {
+                min-width: 100%;
+                max-width: 100%;
+                width: 100%;
+
+                min-height: 3vh;
+                max-height: 3vh;
+                height: 3vh;
+
+                display: flex;
+                justify-content: left;
+                align-items: center;
+
+                background-color: rgb(111, 111, 111);
+            }
+
+            .aluno-container > button.btn-remove {
+                width: 4%;
+                min-width: 30px;
+                height: 100%;
+
+                border: none;
+                
+                color: whitesmoke;
+                background-color: black;
+            }
+
+            .aluno-container span {
+                flex: 1;
+                flex-basis: 0;
+            }
+        </style>
+    </body>
+
+    <script>
+        Vue.component('aluno', {
+            props: ['index', 'id', 'nome', 'nota'],
+            template:
+                `
+                <div class="aluno-container">
+                    <button title="Deletar registro" class="btn-remove" @click="remover(index)">
+                        X
+                    </button>
+
+                    <span>ID:   <b>{{id}}</b></span>
+                    <span>Nome: <b>{{nome}}</b></span>
+                    <span>Nota: <b>{{nota}}</b></span>
+                </div>
+            `,
+            methods: {
+                remover(index) {
+                    this.$emit('on-delete', index);
+                }
+            }
+
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+                aluno: {
+                    id: null,
+                    nome: '',
+                    nota: 0
+                },
+                alunos: [
+                ],
+            },
+            methods: {
+                adicionar() {
+                    let newAluno = {
+                        id: parseInt(Math.random() * 100),
+                        nome: this.aluno.nome,
+                        nota: this.aluno.nota,
+                    };
+                    this.alunos.push(newAluno);
+                    this.aluno.nome = '';
+                    this.aluno.nota = 0;
+
+                },
+                remover(index) {
+                    this.alunos.splice(index, 1);
+                }
+            },
+
+        })
+
+    </script>
+</html>
