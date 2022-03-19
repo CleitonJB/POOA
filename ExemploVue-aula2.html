@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Meu Top 5</title>
+        <title>Home</title>
         <meta charset="utf-8">
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     </head>
     <body>
         <div id='app'>
             <div class="content">
-                <h1>Top 5 - Linguagens de programação </h1>
+                <h1>Eu e as Linguagens de programação </h1>
                 
                 <fieldset>
                     <legend>Nova linguagem</legend>
 
-                    <label>Foto (url):</label>
-                    <input type='url' v-model='linguagem.foto'>
-                    <label>Nome:</label>
-                    <input type='text' v-model='linguagem.nome'>
-                    <label>Ano de lançamento:</label>
-                    <input type='number' v-model='linguagem.ano'>
+                    <!-- Foto -->
+                    <div class="row">
+                        <label>Foto (URL):</label>
+                        <input type='url' v-model='linguagem.foto'>
+                    </div>
+                    
+                    <!-- Nome -->
+                    <div class="row">
+                        <label>Nome:</label>
+                        <input type='text' v-model='linguagem.nome'>
+                    </div>
 
-                    <button v-on:click="adicionar()">Adicionar</button>
+                    <!-- Ano -->
+                    <div class="row">
+                        <label>Ano de lançamento:</label>
+                        <input type='number' v-model='linguagem.ano'>
+                    </div>
+
+                    <div id="add-button-container">
+                        <button id="add-button" v-on:click="adicionar()">Adicionar</button>
+                    </div>
                 </fieldset>
 
                 <div id="list-container">
@@ -83,6 +96,7 @@
             fieldset {
                 width: 60%;
 
+                border: 2px solid rgb(206, 206, 206);
                 border-radius: 0.3rem;
 
                 margin: 0 auto;
@@ -92,6 +106,46 @@
             fieldset > legend {
                 padding: 0 0.5rem;
                 font-weight: 600;
+            }
+
+            div.row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                margin-bottom: 0.5rem;
+            }
+            div.row > label {
+                white-space: nowrap;
+                margin-right: 0.5rem;
+            }
+            div.row > input {
+                width: 60%;
+
+                color: whitesmoke;
+                background-color: rgba(0, 0, 0, 0.3);
+
+                border: 2px solid black;
+                border-radius: 0.35rem;
+                padding: 0.4rem;
+            }
+
+            div#add-button-container {
+                text-align: center;
+
+                margin-top: 1rem;
+            }
+
+            #add-button {
+                color: whitesmoke;
+                background-color: black;
+
+                font-size: 0.8rem;
+                font-weight: 600;
+
+                border: none;
+                border-radius: 0.35rem;
+                padding: 0.5rem 1rem;
             }
 
             #list-container {
